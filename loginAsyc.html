@@ -1,0 +1,41 @@
+<!-- 
+    @Name: Hridoy Rahman
+    @Student_ID: 7340334
+    @Version: 1.0 
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Login(Async)</title>
+</head>
+<script>
+        function callCheckPass(){
+            var username = document.querySelector("#user").value;
+            var pwd = document.querySelector("#pass").value;
+
+            asyncRequest = new XMLHttpRequest();
+            asyncRequest.addEventListener("readystatechange", eve=>{
+                if(asyncRequest.readyState == 4){
+                    document.getElementById("contentArea").innerHTML = asyncRequest.responseText;
+                }
+            });
+            asyncRequest.open("POST", "../../cgi-bin/checkpass.cgi", true);
+            asyncRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            asyncRequest.send("username=" + username + "&" + "pwd=" + pwd);
+
+        }
+    </script>
+<body>
+    <h1> Please Login </h1>
+    User Name<br>
+    <input type="text" id="user" ><br>
+    Password<br>
+    <input type="password" id="pass" ><br><br>
+    <button type="button" onclick="callCheckPass()"> Login </button>
+    <p id="contentArea"> </p>
+    
+</body>
+    
+</html>
